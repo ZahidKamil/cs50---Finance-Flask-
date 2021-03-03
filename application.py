@@ -132,7 +132,7 @@ def password_change():
                 lambda s:any(x.isupper() for x in new_password) or 'uppercase characters',
                 lambda s:any(x.islower() for x in new_password) or 'lowercase characters',
                 lambda s:any(x.isdigit() for x in new_password) or 'digits',
-                lambda s:True if (regex.search(new_password)==None) else 'special characters',
+                lambda s:True if (regex.search(new_password)!=None) else 'special characters',
                 lambda s:len(new_password)>=5 or 'number of characters greater than 5'
                 ]
             #obtaining only the strings if true then it is ignored as it is one of the conditions that are satisfied
