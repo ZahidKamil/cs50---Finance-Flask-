@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <form action="/register" method="post">
+        <div class="form-group">
+            <input id="username_check" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text" onkeyup="check_username();">
+            <p id="username_status"></p>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="password-first" placeholder="password" type="password">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="password-second" placeholder="Re-type password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <script>
+
+        function check_username(){
+            var username = document.getElementById("username_check").value;
+            var status = document.getElementById("username_status");
+            var ajax = new XMLHttpRequest();
+            $.get("/check?username="+username, function(data){//jquery ajax get to load data from the server
+                if (data==true){
+                    // alert("username is available");
+                    status.innerHTML = "Username available"; //Change the HTML content of a <p> element with id="demo":
+                }else{
+                    // alert("username is taken");
+                    status.innerHTML = "Username taken";
+                    event.preventDefault();
+                }
+            });
+
+        }
+
+    </script>
+
+{% endblock %}
